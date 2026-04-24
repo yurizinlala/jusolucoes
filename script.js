@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      spotlight.style.background = `radial-gradient(350px circle at ${x}px ${y}px, rgba(249,115,22,0.06), transparent 70%)`;
+      spotlight.style.background = `radial-gradient(350px circle at ${x}px ${y}px, rgba(27,94,59,0.12), transparent 70%)`;
     });
   });
 
