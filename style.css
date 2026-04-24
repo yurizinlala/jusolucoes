@@ -1,0 +1,506 @@
+/* ===== JD Soluções Ergonômicas — Premium Interactive Styles ===== */
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1B5E3B;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #14472D;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(27, 94, 59, 0.3);
+  color: #fff;
+}
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger>* {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.revealed>*:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.reveal-stagger.revealed>*:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.reveal-stagger.revealed>*:nth-child(3) {
+  transition-delay: 0.25s;
+}
+
+.reveal-stagger.revealed>*:nth-child(4) {
+  transition-delay: 0.35s;
+}
+
+.reveal-stagger.revealed>* {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Text Reveal (char by char) ── */
+.text-reveal span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.text-reveal.revealed span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CTA Pulse Glow ── */
+@keyframes cta-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(27, 94, 59, 0.3),
+      0 0 30px rgba(27, 94, 59, 0.1),
+      0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(27, 94, 59, 0.5),
+      0 0 50px rgba(27, 94, 59, 0.15),
+      0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.cta-pulse {
+  animation: cta-pulse 2.5s ease-in-out infinite;
+}
+
+.cta-pulse:hover {
+  animation: none;
+  box-shadow: 0 0 30px rgba(27, 94, 59, 0.6),
+    0 0 60px rgba(27, 94, 59, 0.2);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* ── Magnetic Button ── */
+.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Glassmorphism Navbar ── */
+.nav-glass {
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.nav-glass.scrolled {
+  background: rgba(10, 10, 10, 0.9);
+  border-bottom-color: rgba(27, 94, 59, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Bento Card (shadcn-inspired) ── */
+.bento-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(27, 94, 59, 0), rgba(27, 94, 59, 0));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: background 0.5s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(27, 94, 59, 0.2);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(27, 94, 59, 0.08);
+}
+
+.bento-card:hover::before {
+  background: linear-gradient(135deg, rgba(27, 94, 59, 0.4), rgba(27, 94, 59, 0.05) 60%);
+}
+
+/* Spotlight effect on cards */
+.bento-card .spotlight {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.bento-card:hover .spotlight {
+  opacity: 1;
+}
+
+/* ── Light Bento Card ── */
+.bento-card-light {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.bento-card-light:hover {
+  transform: translateY(-6px);
+  border-color: rgba(27, 94, 59, 0.2);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(27, 94, 59, 0.1);
+}
+
+/* ── Animated Gradient Border ── */
+@keyframes border-rotate {
+  0% {
+    --angle: 0deg;
+  }
+
+  100% {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle), #1B5E3B, transparent 40%, transparent 60%, #1B5E3B);
+  animation: border-rotate 4s linear infinite;
+  z-index: -1;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: #0a0a0a;
+  z-index: -1;
+}
+
+/* ── FAQ Accordion ── */
+.faq-item {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+.faq-item:hover {
+  border-color: rgba(27, 94, 59, 0.2);
+}
+
+.faq-item.active {
+  border-color: rgba(27, 94, 59, 0.3);
+  box-shadow: 0 8px 30px rgba(27, 94, 59, 0.06);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.active .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+}
+
+.faq-chevron {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.active .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Stat Card ── */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #1B5E3B, transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.stat-card:hover::after {
+  transform: translateX(0);
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Noise Texture ── */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Accent Line ── */
+.accent-line {
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #1B5E3B, #2E7D52);
+  border-radius: 2px;
+}
+
+/* ── Lead Input ── */
+.lead-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(27, 94, 59, 0.4);
+  border-color: #1B5E3B;
+}
+
+/* ── Mobile Menu ── */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu.open {
+  max-height: 400px;
+}
+
+/* ── Floating Decorations ── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+
+  66% {
+    transform: translateY(8px) rotate(-1deg);
+  }
+}
+
+.float-slow {
+  animation: float 9s ease-in-out infinite;
+}
+
+.float-medium {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+/* ── Grid Lines Decoration ── */
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ── Radial Glow ── */
+.radial-glow {
+  background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(27, 94, 59, 0.1) 0%, transparent 70%);
+}
+
+/* ── Badge Shimmer ── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.badge-shimmer {
+  background: linear-gradient(90deg, rgba(27, 94, 59, 0.1) 0%, rgba(27, 94, 59, 0.2) 50%, rgba(27, 94, 59, 0.1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ── Typewriter Animation ── */
+.typewriter-h1 .typewriter-line {
+  display: inline;
+  border-right: none;
+}
+
+.typewriter-h1 .typewriter-line .typewriter-char {
+  opacity: 0;
+  transition: none;
+}
+
+.typewriter-h1 .typewriter-line .typewriter-char.visible {
+  opacity: 1;
+}
+
+.typewriter-h1 .typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: #1B5E3B;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink-cursor 0.75s step-end infinite;
+}
+
+@keyframes blink-cursor {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── Specialist Photo (3D Floating) ── */
+.specialist-photo-wrapper {
+  perspective: 800px;
+}
+
+.specialist-photo {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.specialist-photo-wrapper:hover .specialist-photo {
+  transform: scale(1.03) translateY(-4px);
+}
+
+/* ── Back to Top ── */
+#back-to-top {
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  transform: translateY(-3px) !important;
+}
+
+/* ── Floating WhatsApp Button ── */
+@keyframes whatsapp-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-float {
+  animation: whatsapp-pulse 2s ease-in-out infinite;
+}
+
+.whatsapp-float:hover {
+  animation: none;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
