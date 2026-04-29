@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         counterObs.unobserve(el);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.2 });
   counters.forEach(el => counterObs.observe(el));
 
 
