@@ -61,27 +61,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 6. Animated Counters ──
   const counters = document.querySelectorAll('[data-count]');
-  const counterObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = e.target;
-        const target = parseInt(el.dataset.count);
-        const suffix = el.dataset.suffix || '';
-        const prefix = el.dataset.prefix || '';
-        const duration = 2200;
-        const start = performance.now();
-        function tick(now) {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 4);
-          el.textContent = prefix + Math.round(eased * target).toLocaleString('pt-BR') + suffix;
-          if (p < 1) requestAnimationFrame(tick);
+  if ('IntersectionObserver' in window && counters.length > 0) {
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = parseInt(el.dataset.count, 10);
+          if (isNaN(target)) return;
+          const suffix = el.dataset.suffix || '';
+          const prefix = el.dataset.prefix || '';
+          const duration = 1600;
+          const start = performance.now();
+          function tick(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 4);
+            el.textContent = prefix + Math.round(eased * target).toLocaleString('pt-BR') + suffix;
+            if (p < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              el.textContent = prefix + target.toLocaleString('pt-BR') + suffix;
+            }
+          }
+          requestAnimationFrame(tick);
+          counterObs.unobserve(el);
         }
-        requestAnimationFrame(tick);
-        counterObs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.2 });
-  counters.forEach(el => counterObs.observe(el));
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px 50px 0px' });
+    counters.forEach(el => counterObs.observe(el));
+  }
 
 
   // ── 7. Spotlight Card Effect (React Bits-inspired) ──
